@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
+        <title>Inicio Productos</title>
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
+         <div class="p-2 flex-fill"><section th:replace="layout/botonesAgregarProducto :: botonesAgregarProducto"></section></div>
+        <section th:replace="layout/agregarProducto :: agregarProducto"></section>
+        <section th:replace="layout/listadoProductos :: listadoProductos"></section>
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
+</html>
