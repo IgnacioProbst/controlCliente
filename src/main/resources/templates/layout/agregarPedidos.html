@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Agregar Cliente</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section th:fragment="agregarPedidos">
+            <div id="agregarPedidos" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title" th:text="#{accion.agregarPedidos}">Agregar Pedidos</h5>
+                            <button class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div> 
+                        <form th:action="@{/guardar}" th:object="${pedido}"
+                              method="POST" class="was-validated">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Cliente</label>
+                                    <select id="cliente" name="cliente" style="width:100%">
+                                        <option th:each="persona : ${personas}">[[${persona.nombre} + ' ' + ${persona.apellido}]]</option>
+                                    </select>
+                                </div>
+                                <label>Producto</label>
+                                <select id="cliente" name="cliente" style="width:100%">
+                                     <option th:each="producto : ${totalProductos}">[[${producto.nombre} + ' $' + ${producto.precio}]]</option>
+                                </select>
+                                <div style="margin-top:10px">
+                                <label for="personass"  >Saldo</label>
+                                <label> </label>
+                                </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit" th:text="#{accion.guardar}">Guardar</button>
+                            </div>
+                        </form>                    
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>

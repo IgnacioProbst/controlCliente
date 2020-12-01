@@ -8,11 +8,11 @@
         <version>2.2.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>ar.com.g5</groupId>
+    <groupId>mx.com.gm</groupId>
     <artifactId>ControlClentes</artifactId>
     <version>1.0</version>
     <name>ControlClientes</name>
-    <description>Applicacion web</description>
+    <description>HolaMundo con Spring</description>
 
     <properties>
         <java.version>13</java.version>

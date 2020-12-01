@@ -15,52 +15,43 @@
                             <div class="card-header">
                                 <h4>[[#{pedidos.titulo-lista}]]</h4>
                             </div>
-                            <div th:if="${recogiendo != null and !recogiendo.empty}" style="overflow-y:scroll; height:300px;">
+                            <div th:if="${personas != null and !personas.empty}"style="overflow-y:scroll; height:300px;">
                                 <table class="table table-stryped">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>#</th>
-                                            <th th:text="#{producto.nombre}">Nombre</th>
-                                            <th th:text="#{producto.precio}">Precio</th>
-                                            <th th:text="#{producto.stock}">Stock</th>
+                                            <th th:text="#{persona.nombre}">Nombre</th>
+                                            <th th:text="#{persona.saldo}">Saldo</th>
+                                            
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
-
-
                                     <tbody>
-
-                                        <tr th:each="producto, contador : ${totalProductos}">
-                                            <td>[[${producto.idProducto}]]</td>
-                                            <td>[[${producto.nombre}]]</td>
-                                            <td>[[${producto.precio}]]</td>
-                                            <td>[[${producto.stock}]]</td>
-
+                                        <tr th:each="persona, contador : ${personas}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${persona.nombre} + ' ' + ${persona.apellido}]]</td>
+                                            <td>[[${new java.text.DecimalFormat('$#,##0.00').format(persona.saldo)}]]</td>
                                             <td>
-
-                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editarProducto/} + ${producto.idProducto}"
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${persona.idPersona}"
                                                    class="btn btn-secondary">
-                                                    <i class="fas fa-angle-double-right"></i> [[#{accion.editarProducto}]]
+                                                    <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
                                                 </a>
                                             </td>
-
-
                                             <td>
-                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarProducto(idProducto=${producto.idProducto})}"
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminar(idPersona=${persona.idPersona})}"
                                                    class="btn btn-dark">
-                                                    <i class="fas fa-angle-double-right"></i> [[#{accion.eliminarProducto}]]
+                                                    <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
                                                 </a>
                                             </td>
-                                    
+                                            
                                         </tr>
                                     </tbody>
-
-
                                 </table>
                             </div>
+                            </div>
                             <div class="text-center p-2" th:if="${recogiendo == null or recogiendo.empty}">
-                                <span th:text="#{producto.lista-vacia}">Lista vacía</span>
+                                <span th:text="#{pedidos.lista-vacia}">Lista vacía</span>
                             </div>
                         </div>
                     </div>

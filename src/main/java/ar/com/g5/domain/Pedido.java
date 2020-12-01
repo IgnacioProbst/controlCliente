@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "pedidos")
+@Table(name = "pedido")
 public class Pedido implements Serializable{
     
     private static final long serialVersionUID = 1L;

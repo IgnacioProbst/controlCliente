@@ -5,6 +5,8 @@ import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import ar.com.g5.domain.Pedido;
 import ar.com.g5.servicio.PedidoService;
+import ar.com.g5.servicio.PersonaService;
+import ar.com.g5.servicio.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -20,16 +22,35 @@ public class ControladorPedidos {
 
     @Autowired
     private PedidoService pedidoService;
+    
+   @Autowired
+    private PersonaService personaService;
 
-    @GetMapping("/Pedidos")
+   @Autowired
+    private ProductoService productoService;
+   
+    @GetMapping("/pedidos")
     public String inicio(Model model, @AuthenticationPrincipal User user) {
-        var pedidos = pedidoService.listarPedidos();
+        var personas = personaService.listarPersonas();
         log.info("ejecutando el controlador Spring MVC");
         log.info("usuario que hizo login:" + user);
-        model.addAttribute("pedidos", pedidos);
+        model.addAttribute("personas", personas);
  
+        var saldoTotal = 0D;
+        for (var p : personas) {
+            saldoTotal += p.getSaldo();
+        }
+        model.addAttribute("saldoTotal", saldoTotal);
+        model.addAttribute("totalClientes", personas.size());
+   
+        var recogiendo = productoService.listarProductos();
+        model.addAttribute("recogiendo", recogiendo);
+        model.addAttribute("totalProductos", recogiendo);
         
-        return "Pedidos";
+//        var pedidos = pedidoService.listarPedidos();
+//         model.addAttribute("pedidos", pedidos);
+      
+        return "pedidos";
     }
 
     @GetMapping("/agregarPedido")
